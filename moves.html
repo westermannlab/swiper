@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- based on https://gist.github.com/p-11 -->
+    <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+
+	<title>Swiper</title>
+    <link rel="stylesheet" href="./css/swipe.css">
+
+<script src="cordova.js"></script>
+<script type="text/javascript">
+ document.addEventListener("deviceready", onDeviceReady, false);
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        window.plugins.intentShim.getIntent(
+	    function(intent)
+	    {
+
+	        var intentExtras = intent.extras;
+	        if (intentExtras == null)
+	            intentExtras = "No extras in intent";
+
+	    },
+	    function()
+	    { }
+    	);
+    }
+</script>
+<script src="./js/hammer.min.js"></script>
+
+</head>
+<body>
+<div style="width: 100%; padding: 10px;"><center><b>Spiegeln sich Situationen, die Sie in Beziehungen erleben, in diesem Bild wider?</b></center></div>
+<div class="tinder" style="border-color: 1px solid black">
+  <div class="tinder--status">
+    <i class="fa fa-remove"></i>
+    <i class="fa fa-heart"></i>
+  </div>
+  
+
+
+  <div id="nopediv" class="tinder--buttons fade-in-first">
+    <button id="nope" style="background-image: url('./img/arrow_left.png');"><i class="fa fa-remove">eher<br>untypisch</i></button>
+  </div>
+
+
+
+
+  <div id="tindercardsdiv" class="tinder--cards fade-in-third" style=""> <!--margin-top: auto;-->
+
+
+  </div>
+
+  <div id="lovediv" class="tinder--buttons fade-in-second">
+    <button id="love" style="background-image: url('./img/arrow_right.png')"><i class="fa fa-heart">eher<br>typisch</i></button>
+  </div>
+</div>
+<script src="./js/moves.js"></script>
+
+</body>
+</html>

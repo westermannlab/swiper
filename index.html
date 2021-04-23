@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+
+	<title>Swiper</title>
+    <link rel="stylesheet" href="./css/swipe.css">
+
+<script src="cordova.js"></script>
+<script type="text/javascript">
+ document.addEventListener("deviceready", onDeviceReady, false);
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        window.plugins.intentShim.getIntent(
+	    function(intent)
+	    {
+
+	        var intentExtras = intent.extras;
+	        if (intentExtras == null)
+	            intentExtras = "No extras in intent";
+
+	    },
+	    function()
+	    { }
+    	);
+    }
+</script>
+
+</head>
+<body>
+<br>&nbsp;<br>&nbsp;<br>&nbsp;
+<center>
+	<a href="swiper.html">Swiper</a><br>&nbsp;<br>
+      <a href="moves.html">MovES: relational space</a><br>&nbsp;<br>
+	<a href="body.html">Bodily Emotions Assessment</a>
+</center>
+</body>
+</html>

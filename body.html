@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+
+	<title>Body</title>
+    <link rel="stylesheet" href="./css/swipe.css">
+    <script src="./js/fabric.min.js"></script>
+
+<script src="cordova.js"></script>
+<script type="text/javascript">
+ document.addEventListener("deviceready", onDeviceReady, false);
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        window.plugins.intentShim.getIntent(
+	    function(intent)
+	    {
+
+	        var intentExtras = intent.extras;
+	        if (intentExtras == null)
+	            intentExtras = "No extras in intent";
+
+	    },
+	    function()
+	    { }
+    	);
+    }
+</script>
+
+
+</head>
+<body>
+Zeichnen Sie Ihre Körpergefühle ein.
+<canvas id="c" width="300" height="628"></canvas>
+
+
+<script>
+var canvas = new fabric.Canvas('c');
+
+canvas.isDrawingMode = true;
+canvas.freeDrawingBrush.width = 5;
+canvas.freeDrawingBrush.color = "#ff0000";
+
+fabric.Image.fromURL('./img/silhouette.png', function(myImg) {
+	var img1 = myImg.set({ left: 0, top: 0 ,scaleX: 2, scaleY: 2});
+         img1.selectable = false;
+    img1.evented = false;
+	canvas.add(img1);
+});
+
+
+canvas.controlsAboveOverlay = true;
+
+/*
+canvas.setOverlayImage('./img/mask.gif', function() {
+    canvas.overlayImage && canvas.overlayImage.scaleToWidth(300)
+    canvas.renderAll()
+  }, {
+    // Needed to position overlayImage at 0/0
+    originX: 'left',
+    originY: 'top'
+  });
+*/
+var emotions = [];
+
+var addedHandler = function (evt) {
+    	var obj = evt.target;
+    	if(obj.get('type') != 'path')
+    		return;
+	var label = prompt("Welches Gefühl spüren Sie dort?");
+
+canvas.add(new fabric.Text(label, {
+  fontFamily: 'Delicious_500',
+  fontSize: 20,
+  left: obj.get('left') + obj.get('width'),
+  top: obj.get('top')
+}));
+	
+	emotions.push([label, obj.toDataURL('png')]);
+};
+
+canvas.on('object:added', addedHandler);
+
+function exportEmotions()
+{
+alert(JSON.stringify(emotions));
+      emotions.forEach((emotion) => {
+  
+    //alert(emotion[1] + ");
+    
+
+})
+}
+
+</script>
+<button onClick="exportEmotions()">Export</button>
+</div>
+</body>
+</html>
